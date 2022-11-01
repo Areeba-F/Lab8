@@ -30,8 +30,8 @@ public class CustomListTest {
     void testAddException() {
         list = MockCityList();
         City city = new City("Yellowknife", "Northwest Territories");
-        list.add(city);
-        assertThrows( IllegalArgumentException.class, () -> {list.add(city); });
+        list.addCity(city);
+        assertThrows( IllegalArgumentException.class, () -> {list.addCity(city); });
     }
 
     @Test
@@ -39,7 +39,7 @@ public class CustomListTest {
         list = MockCityList();
         City city = new City("Charlottetown", "Prince Edward Island");
         Assertions.assertEquals(false, list.hasCities(city));
-        list.add(city);
+        list.addCity(city);
         Assertions.assertEquals(true, list.hasCities(city));
     }
 
@@ -47,10 +47,10 @@ public class CustomListTest {
     void testDeleteCities() {
         list = MockCityList();
         City city = new City("Regina", "Saskatchewan");
-        list.add(city);
-        Assertions.assertEquals(2, list.getCities().size());
-        list.deleteCities(city);
+        list.addCity(city);
         Assertions.assertEquals(1, list.getCities().size());
+        list.deleteCities(city);
+        Assertions.assertEquals(0, list.getCities().size());
     }
 
     @Test
@@ -64,10 +64,10 @@ public class CustomListTest {
     void testCountCities() {
         list = MockCityList();
         City city = new City("Charlottetown", "Prince Edward Island");
+        Assertions.assertEquals(0, list.getCities().size());
+        list.addCity(city);
         Assertions.assertEquals(1, list.getCities().size());
-        list.add(city);
-        Assertions.assertEquals(2, list.getCities().size());
         list.deleteCities(city);
-        Assertions.assertEquals(1, list.getCities().size());
+        Assertions.assertEquals(0, list.getCities().size());
     }
 }
