@@ -1,8 +1,10 @@
 package com.example.lab8;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.Before;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -22,5 +24,50 @@ public class CustomListTest {
         int listSize = list.getCount();
         list.addCity(new City("Estevan", "SK"));
         assertEquals(list.getCount(), listSize + 1);
+    }
+
+    @Test
+    void testAddException() {
+        list = MockCityList();
+        City city = new City("Yellowknife", "Northwest Territories");
+        list.add(city);
+        assertThrows( IllegalArgumentException.class, () -> {list.add(city); });
+    }
+
+    @Test
+    void testHasCities() {
+        list = MockCityList();
+        City city = new City("Charlottetown", "Prince Edward Island");
+        Assertions.assertEquals(false, list.hasCities(city));
+        list.add(city);
+        Assertions.assertEquals(true, list.hasCities(city));
+    }
+
+    @Test
+    void testDeleteCities() {
+        list = MockCityList();
+        City city = new City("Regina", "Saskatchewan");
+        list.add(city);
+        Assertions.assertEquals(2, list.getCities().size());
+        list.deleteCities(city);
+        Assertions.assertEquals(1, list.getCities().size());
+    }
+
+    @Test
+    void testDeleteCitiesException() {
+        list = MockCityList();
+        City city = new City("Yellowknife", "Northwest Territories");
+        assertThrows( IllegalArgumentException.class, () -> {list.deleteCities(city); });
+    }
+
+    @Test
+    void testCountCities() {
+        list = MockCityList();
+        City city = new City("Charlottetown", "Prince Edward Island");
+        Assertions.assertEquals(1, list.getCities().size());
+        list.add(city);
+        Assertions.assertEquals(2, list.getCities().size());
+        list.deleteCities(city);
+        Assertions.assertEquals(1, list.getCities().size());
     }
 }

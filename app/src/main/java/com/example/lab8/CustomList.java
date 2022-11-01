@@ -11,7 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
-
+import java.util.Collections;
+import java.util.List;
+/**
+ * This is a class that keeps track of a list of city objects
+ */
 public class CustomList extends ArrayAdapter<City> {
 
     private ArrayList<City> cities;
@@ -49,8 +53,49 @@ public class CustomList extends ArrayAdapter<City> {
         return cities.size();
     }
 
+    /**
+     * This adds a city to the list if the city does not exist
+     * @param city
+     * This is a candidate city to add
+     */
     public void addCity(City city) {
         cities.add(city);
+    }
+
+    /**
+     * This returns whether or not the city belongs in the list
+     *  @param city
+     *  @return
+     * Return true or false
+     */
+    public boolean hasCities(City city) {
+        return false;
+    }
+
+    /**
+     * This returns a sorted list of cities
+     * @return
+     * Return the sorted list
+     */
+    public List getCities() {
+        return null;
+    }
+
+    /**
+     * This checks if a city is present in the list. If it does then remove it from the list, if not then throw an exception
+     * @param city
+     */
+    public void deleteCities(City city) {
+
+    }
+
+    /**
+     * This returns how many cities are in the list
+     * @return
+     * Returns count
+     */
+    public int countCities() {
+        return 0;
     }
 
 }
